@@ -8,13 +8,12 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol"; /
 
 import "@openzeppelin/contracts/utils/Counters.sol";   //counter 
 
-import "hardhat/console.sol"; //ethers hard hat
-
 import "@openzeppelin/contracts/utils/Base64.sol";  //base64 encoding for -browser protection
 
+import "hardhat/console.sol"; //ethers hard hat
 
 /* tokenUri seems to be already in ERC721a */
-contract MRKT1 is ERC721URIStorage {
+contract marikit is ERC721URIStorage {
 
 /* counter imports */
   using Counters for Counters.Counter;
@@ -357,7 +356,7 @@ contract MRKT1 is ERC721URIStorage {
     public function here 
 */
 
-  function makeAnEpicNFT() public 
+  function randomNft() public 
   {
 
     /*contract is called & wallet has to sign*/
@@ -455,7 +454,6 @@ contract MRKT1 is ERC721URIStorage {
 
   } //END OF makeAnEpicNFT - MAIN FUNCTION
 
-  // uint256 public theArrayID;
 
 
   function pickANFT(
