@@ -21,8 +21,10 @@ const main = async () => {
   console.log(nftContract.address)
   console.log("")
 
+
+
   // Call the function.
-  let txn = await nftContract.randomNft()
+  let txn = await nftContract.makeAnRandomNFT()
   // Wait for it to be mined.
   await txn.wait()
 
@@ -33,10 +35,11 @@ const main = async () => {
   console.log("https://rinkeby.rarible.com/token/%s:%s",nftContract.address,counter1)
   console.log("")
   
+
   // Call the function.
-  txn = await nftContract.pickANFT(2,2);
+  let txn2 = await nftContract.mintMultiple_random(3);
   // Wait for it to be mined.
-  await txn.wait()
+  await txn2.wait()
   //Link
   counter1 = counter1 + 1;
   console.log("Rarible Link:")

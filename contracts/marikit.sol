@@ -10,7 +10,9 @@ import "@openzeppelin/contracts/utils/Counters.sol";   //counter
 
 import "@openzeppelin/contracts/utils/Base64.sol";  //base64 encoding for -browser protection
 
-import "hardhat/console.sol"; //ethers hard hat
+import "hardhat/console.sol"; //ethers hard hat for front end 
+
+
 
 /* tokenUri seems to be already in ERC721a */
 contract marikit is ERC721URIStorage {
@@ -316,7 +318,7 @@ contract marikit is ERC721URIStorage {
   //string(string A, string B, string C);
 
   //MAGICAL events - used to get a random address
-  event NewEpicNFTMinted(address sender, uint256 ripidclea);
+  event NewRandomNFTMinted(address sender, uint256 ripidclea);
 
   constructor() ERC721 ("Marikit Test Non-Payable v1", "MRKT") {
       
@@ -356,7 +358,7 @@ contract marikit is ERC721URIStorage {
     public function here 
 */
 
-  function randomNft() public 
+  function makeAnRandomNFT() public 
   {
 
     /*contract is called & wallet has to sign*/
@@ -426,16 +428,16 @@ contract marikit is ERC721URIStorage {
 
 
     //loop for printing out strings
-    uint i;
-    for(i = 0; i<20; i++){
+    // uint i;
+    // for(i = 0; i<23; i++){
 
-        console.log("\n***TESTING string()***********************************************************");
-        console.log("\ntestv1 ARRAY [ %s ]:\n", i);
-        console.log(NFTARRAYHERE[i]);
+    //     console.log("\n***TESTING string()***********************************************************");
+    //     console.log("\nNFT ARRAY [ %s ]:\n", i);
+    //     console.log(NFTARRAYHERE[i]);
 
-    }
+    // }
 
-    console.log("Finishing up!");
+    console.log("Finishing up! \n");
 
     _safeMint(msg.sender, newItemId);
     
@@ -447,124 +449,45 @@ contract marikit is ERC721URIStorage {
     console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
 
     // EMIT MAGICAL EVENTS.
-    emit NewEpicNFTMinted(msg.sender, newItemId);
+    emit NewRandomNFTMinted(msg.sender, newItemId);
 
+    console.log("~Random Mint 1x Finished! \n");
 
     // payable(owner).transfer(msg.value);
 
-  } //END OF makeAnEpicNFT - MAIN FUNCTION
+  } //END OF makeAnRandomNFT - MAIN FUNCTION
 
+  // uint256 public theArrayID;
 
-
-  function pickANFT(
-    uint256 theArrayID,
-    uint256 theQuantity
+  function mintMultiple_random(
+    uint256 quantityOfNFTs
     ) public {
 
-      uint256 newItemId = _tokenIds.current();  //token URI
 
-      if(theQuantity <= 1){
+      if(quantityOfNFTs <= 1){
        
-        /* gets the new string */
-        string memory first = NFTARRAYHERE[theArrayID];
-
-
-        /* encondes the data abi */
-        string memory combinedWord = string(abi.encodePacked(first));
-
-
-
-        /* Encodes it in Base64 -the json is inside encoded */
-        string memory jsonPicked = Base64.encode(
-            bytes(
-                string(
-                    abi.encodePacked(
-
-                      combinedWord   //this is basically either RIMURU OR MILIM
-        
-                    )
-                )
-            )
-        );
-
-        string memory finalTokenUri = string(
-          abi.encodePacked("data:application/json;base64,", jsonPicked)
-        );
-
-        console.log("\n----TokenUri----------------");
-        console.log(finalTokenUri);
-        console.log("----------------------------\n");
-
-
-        _safeMint(msg.sender, newItemId);
-
-        // Update your URI!!!
-        _setTokenURI(newItemId, finalTokenUri);
-
-        _tokenIds.increment();
-        console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
-
-        emit NewEpicNFTMinted(msg.sender, newItemId);
-
-        //------non-payable
-
-      } // less than one MINT end
-
-
-      if(theQuantity >= 2){
-
-        uint256 j;
-        for(j = 0; j <= theQuantity; j++){
-
-           /* gets the new string */
-          string memory first = NFTARRAYHERE[theArrayID];
-
-          /* encondes the data abi */
-          string memory combinedWord = string(abi.encodePacked(first));
-
-
-          /* Encodes it in Base64 -the json is inside encoded */
-          string memory jsonPicked = Base64.encode(
-              bytes(
-                  string(
-                      abi.encodePacked(
-                        combinedWord   //this is basically either RIMURU OR MILIM
-                      )
-                  )
-              )
-          );
-
-          string memory finalTokenUri = string(
-            abi.encodePacked("data:application/json;base64,", jsonPicked)
-          );
-
-          console.log("\n----TokenUri----------------");
-          console.log(finalTokenUri);
-          console.log("----------------------------\n");
-
-
-          _safeMint(msg.sender, newItemId);
-
-          // Update your URI!!!
-          _setTokenURI(newItemId, finalTokenUri);
-
-          _tokenIds.increment();
-          console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
-
-          emit NewEpicNFTMinted(msg.sender, newItemId);
-
-          //------non-payable
-
-        } // less than one MINT end
-
+          makeAnRandomNFT();
 
       } //QTY over 2
-
       
-  } //end of function Pick NFT
+      if(quantityOfNFTs >= 2){
+
+        uint256 j = 0 ;
+        while(j < quantityOfNFTs) {
+
+          j = j + 1 ;
+
+          makeAnRandomNFT();
+        
+        } // less than one MINT end
+      } //QTY over 2
+
+      console.log("~Multiple Mints Finished. \n");
+
+    }//end of function Pick NFT
 
 
-  function pickANFT(
+  function pickANFT_id(
     uint256 theArrayID
     ) public {
 
@@ -607,13 +530,14 @@ contract marikit is ERC721URIStorage {
         _tokenIds.increment();
         console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
 
-        emit NewEpicNFTMinted(msg.sender, newItemId);
+        emit NewRandomNFTMinted(msg.sender, newItemId);
 
         //------non-payable
 
   } //end of function Pick NFT
 
-  /* in solidity you can make overloaded functions */
 
+
+  /* in solidity you can make overloaded functions */
 
 }
