@@ -17,11 +17,12 @@ const main = async () => {
   console.log("Desc: deploys contract with all functions called")
 
   //deploy address 
-  console.log("Contract deployed to (this is the contract address):")
-  console.log(nftContract.address)
+  let etherscanTemplate = "https://goerli.etherscan.io/address/NFTADDRESS"
+  let etherscanLink= etherscanTemplate.replace('NFTADDRESS', nftContract.address);
+
+  console.log("Contract deployed to (this is the smart contract address):")
+  console.log(etherscanLink)
   console.log("")
-
-
 
   // Call the function.
   let txn = await nftContract.makeAnRandomNFT()
