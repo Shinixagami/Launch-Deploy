@@ -1,0 +1,16 @@
+#Hashtags are comments
+
+node_modules
+.env
+coverage
+coverage.json
+typechain
+
+#hardhat files (this is a comment)
+cache
+artifacts
+
+#hardhat.config.js IS NOT here because we need the config
+#network configurations to be available on repos. 
+
+
